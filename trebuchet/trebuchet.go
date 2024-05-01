@@ -14,32 +14,34 @@ func CalibrationValueFromFile(filePath string) (int, error) {
 		return 0, err
 	}
 
-	var count int
-
+	var sum int
 	lines := strings.Split(string(content), "\n")
 
 	for _, line := range lines {
 		var first, last rune
-		var calibration string
+		foundFirst := false
 
 		for _, char := range line {
 			if unicode.IsDigit(char) {
-				if first == 0 {
+				if !foundFirst {
 					first = char
+					foundFirst = true
 				}
 				last = char
 			}
 		}
-		calibration = string(first) + string(last)
-		calibrationNum, err := strconv.Atoi(calibration)
 
-		if err != nil {
-			fmt.Printf("Error converting calibration to integer: %v", err)
-			continue
+		if foundFirst {
+			calibration := strconv.Itoa(int(first-'0')) + strconv.Itoa(int(last-'0'))
+			calibrationNum, err := strconv.Atoi(calibration)
+
+			if err != nil {
+				fmt.Printf("Error converting calibration to integer: %v", err)
+				continue
+			}
+			sum += calibrationNum
 		}
-
-		count += calibrationNum
 	}
 
-	return count, nil
+	return sum, nil
 }
