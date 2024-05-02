@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/ericmariot/goAdventTrebuchet/trebuchet"
+	"github.com/stretchr/testify/require"
 )
 
 func TestCalibrationValueFromFile_CorrectSum_PartTwo(t *testing.T) {
 	filePath := "./input_test_two.txt"
-	want := 281
 
 	result, err := trebuchet.CalibrationValueFromFilePartTwo(filePath)
 	if err != nil {
@@ -16,7 +16,5 @@ func TestCalibrationValueFromFile_CorrectSum_PartTwo(t *testing.T) {
 		return
 	}
 
-	if result != want {
-		t.Errorf("Expected: %v, got: %v", want, result)
-	}
+	require.Equal(t, 281, result)
 }
