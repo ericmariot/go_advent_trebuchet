@@ -8,9 +8,17 @@ import (
 )
 
 func main() {
-	count, err := trebuchet.CalibrationValueFromFile("trebuchet/input.txt")
+	// Getting the count for Part One
+	countOne, err := trebuchet.CalibrationValueFromFilePartOne("trebuchet/input.txt")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error in Part One: %v", err)
 	}
-	fmt.Println("Total count:", count)
+	fmt.Println("Total count from Part One:", countOne)
+
+	// Getting the count for Part Two
+	countTwo, err2 := trebuchet.CalibrationValueFromFilePartTwo("trebuchet/input.txt")
+	if err2 != nil {
+		log.Fatalf("Error in Part Two: %v", err2)
+	}
+	fmt.Println("Total count from Part Two:", countTwo)
 }

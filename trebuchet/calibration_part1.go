@@ -2,20 +2,17 @@ package trebuchet
 
 import (
 	"fmt"
-	"os"
 	"strconv"
-	"strings"
 	"unicode"
 )
 
-func CalibrationValueFromFile(filePath string) (int, error) {
-	content, err := os.ReadFile(filePath)
+func CalibrationValueFromFilePartOne(filePath string) (int, error) {
+	lines, err := ReadLinesFromFile(filePath)
 	if err != nil {
 		return 0, err
 	}
 
 	var sum int
-	lines := strings.Split(string(content), "\n")
 
 	for _, line := range lines {
 		var first, last rune
